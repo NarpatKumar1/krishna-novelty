@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "title": "Gift Box Set",
+        "desc": "Premium wrapped gift boxes for every occasion",
+        "price": 299,
+        "image": "images/gift-box.png",
+        "badge": "Bestseller",
+        "whatsappMessage": "Hi! I'm interested in the Gift Box Set (₹299). Please share more details!"
+    },
+    {
+        "id": 2,
+        "title": "Soft Toys",
+        "desc": "Cuddly teddy bears and plush toys kids love",
+        "price": 499,
+        "image": "images/soft-toy.png",
+        "badge": "Popular",
+        "whatsappMessage": "Hi! I'm interested in the Soft Toys (₹499). Please share more details!"
+    },
+    {
+        "id": 3,
+        "title": "Home Decor",
+        "desc": "Elegant vases, showpieces & decorative items",
+        "price": 399,
+        "image": "images/home-decor.png",
+        "badge": null,
+        "whatsappMessage": "Hi! I'm interested in Home Decor items (₹399). Please share more details!"
+    },
+    {
+        "id": 4,
+        "title": "Hair Accessories",
+        "desc": "Clips, bands, scrunchies & butterfly pins",
+        "price": 149,
+        "image": "images/hair-accessories.png",
+        "badge": "New",
+        "whatsappMessage": "Hi! I'm interested in Hair Accessories (₹149). Please share more details!"
+    },
+    {
+        "id": 5,
+        "title": "Fancy Bags",
+        "desc": "Trendy handbags & purses for every style",
+        "price": 250,
+        "image": "/uploads/1785301749475.jpg",
+        "badge": "",
+        "whatsappMessage": "Hi! I'm interested in Fancy Bags (₹599). Please share more details!"
+    },
+    {
+        "id": 6,
+        "title": "Candles & Holders",
+        "desc": "Scented candles & elegant glass holders",
+        "price": 249,
+        "image": "https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=400&h=400&fit=crop&q=80",
+        "badge": "Trending",
+        "whatsappMessage": "Hi! I'm interested in Candles & Holders (₹249). Please share more details!"
+    },
+    {
+        "title": "Makeup kit",
+        "desc": "All available",
+        "price": 200,
+        "image": "/uploads/1785301515439.jpg",
+        "badge": "",
+        "whatsappMessage": "",
+        "id": 7
+    },
+    {
+        "title": "Plastic bangles ",
+        "desc": "all types of plastic bangle available",
+        "price": 100,
+        "image": "/uploads/1785301220745.jpg",
+        "badge": "",
+        "whatsappMessage": "",
+        "id": 8
+    }
+]

@@ -70,5 +70,23 @@
         "badge": "",
         "whatsappMessage": "",
         "id": 8
+    },
+    {
+        "title": "Earrings",
+        "desc": "All new and trending models",
+        "price": 40,
+        "image": "/uploads/1785320313259.jpg",
+        "badge": "",
+        "whatsappMessage": "",
+        "id": 9
+    },
+    {
+        "title": "Fancy bangles ",
+        "desc": "trending and new models",
+        "price": 140,
+        "image": "/uploads/1785320371600.jpg",
+        "badge": "",
+        "whatsappMessage": "",
+        "id": 10
     }
 ]

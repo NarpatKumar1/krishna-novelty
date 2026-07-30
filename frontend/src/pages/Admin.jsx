@@ -11,11 +11,16 @@ const getImageUrl = (image) => {
     return `/${trimmed}`;
 };
 
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'admin123';
+
 export default function Admin() {
   const [products, setProducts] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [adminPassword, setAdminPassword] = useState('');
+  const [authError, setAuthError] = useState('');
   
   const [formData, setFormData] = useState({
     title: '',
@@ -59,6 +64,15 @@ export default function Admin() {
     setCurrentProduct(null);
   };
 
+  const handleLogin = () => {
+    if (adminPassword === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      setAuthError('');
+    } else {
+      setAuthError('Incorrect password.');
+    }
+  };
+
   const handleEdit = (product) => {
     setIsEditing(true);
     setCurrentProduct(product);
@@ -88,6 +102,11 @@ export default function Admin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    if (!isAuthenticated) {
+      setAuthError('Please login with the admin password first.');
+      return;
+    }
+
     let finalImageUrl = formData.image;
     
     if (imageFile) {
@@ -136,14 +155,31 @@ export default function Admin() {
         <h1>Admin Panel</h1>
       </div>
 
-      <div className="admin-content">
-        <div className="admin-form-section">
-          <h2>{isEditing ? 'Edit Product' : 'Add New Product'}</h2>
-          <form onSubmit={handleSubmit} className="admin-form">
-            <div className="form-group">
-              <label>Title</label>
-              <input type="text" name="title" value={formData.title} onChange={handleInputChange} required />
-            </div>
+      {!isAuthenticated ? (
+        <div className="admin-auth-section">
+          <h2>Admin Login</h2>
+          <div className="form-group">
+            <label>Admin Password</label>
+            <input
+              type="password"
+              value={adminPassword}
+              onChange={(e) => setAdminPassword(e.target.value)}
+            />
+          </div>
+          {authError && <p className="auth-error">{authError}</p>}
+          <button type="button" className="btn-primary" onClick={handleLogin}>
+            Login
+          </button>
+        </div>
+      ) : (
+        <div className="admin-content">
+          <div className="admin-form-section">
+            <h2>{isEditing ? 'Edit Product' : 'Add New Product'}</h2>
+            <form onSubmit={handleSubmit} className="admin-form">
+              <div className="form-group">
+                <label>Title</label>
+                <input type="text" name="title" value={formData.title} onChange={handleInputChange} required />
+              </div>
             
             <div className="form-group">
               <label>Description</label>
@@ -208,6 +244,7 @@ export default function Admin() {
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }

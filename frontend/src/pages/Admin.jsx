@@ -30,6 +30,7 @@ export default function Admin() {
     price: '',
     image: '',
     badge: '',
+    category: '',
     whatsappMessage: ''
   });
 
@@ -60,7 +61,7 @@ export default function Admin() {
   };
 
   const resetForm = () => {
-    setFormData({ title: '', desc: '', price: '', image: '', badge: '', whatsappMessage: '' });
+    setFormData({ title: '', desc: '', price: '', image: '', badge: '', category: '', whatsappMessage: '' });
     setImageFile(null);
     setIsEditing(false);
     setCurrentProduct(null);
@@ -84,6 +85,7 @@ export default function Admin() {
       price: product.price,
       image: product.image,
       badge: product.badge || '',
+      category: product.category || '',
       whatsappMessage: product.whatsappMessage || ''
     });
   };
@@ -203,6 +205,11 @@ export default function Admin() {
             <div className="form-group">
               <label>Badge (Optional)</label>
               <input type="text" name="badge" value={formData.badge} onChange={handleInputChange} placeholder="e.g. Bestseller" />
+            </div>
+
+            <div className="form-group">
+              <label>Category</label>
+              <input type="text" name="category" value={formData.category} onChange={handleInputChange} placeholder="e.g. Jewelry, Bags, Cosmetics" />
             </div>
             
             <div className="form-group">

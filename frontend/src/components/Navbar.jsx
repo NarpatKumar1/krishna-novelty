@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
+import { Sun, Moon, ShoppingCart } from 'lucide-react';
 
-const Navbar = () => {
+const Navbar = ({ cartCount = 0, onCartOpen }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('hero');
+    const [theme, setTheme] = useState(() => {
+        return localStorage.getItem('theme') || 'light';
+    });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -28,6 +32,19 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        } else {
+            document.body.classList.remove('dark-theme');
+        }
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    };
+
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
     const closeMenu = () => setIsMenuOpen(false);
 
@@ -37,6 +54,7 @@ const Navbar = () => {
                 <span className="logo-icon">✦</span>
                 Krishna Novelty
             </a>
+            
             <nav id="nav-menu" className={isMenuOpen ? 'open' : ''}>
                 <a href="#" className={`nav-link ${activeSection === 'hero' ? 'active' : ''}`} onClick={closeMenu}>Home</a>
                 <a href="#products" className={`nav-link ${activeSection === 'products' ? 'active' : ''}`} onClick={closeMenu}>Products</a>
@@ -44,11 +62,31 @@ const Navbar = () => {
                 <a href="#contact" className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`} onClick={closeMenu}>Contact</a>
                 <a href="#admin" className={`nav-link ${activeSection === 'admin' ? 'active' : ''}`} onClick={closeMenu}>Admin</a>
             </nav>
-            <button className={`hamburger ${isMenuOpen ? 'active' : ''}`} id="hamburger" aria-label="Toggle navigation menu" onClick={toggleMenu}>
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+
+            <div className="cart-actions-wrap">
+                <button 
+                    className="theme-toggle-btn" 
+                    onClick={toggleTheme}
+                    aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                >
+                    {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+                </button>
+                
+                <button 
+                    className="cart-toggle-btn" 
+                    onClick={onCartOpen}
+                    aria-label="View Shopping Cart"
+                >
+                    <ShoppingCart size={20} />
+                    {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+                </button>
+
+                <button className={`hamburger ${isMenuOpen ? 'active' : ''}`} id="hamburger" aria-label="Toggle navigation menu" onClick={toggleMenu}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </header>
     );
 };

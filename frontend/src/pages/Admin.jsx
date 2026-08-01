@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { Plus, Pencil, Trash2, X } from 'lucide-react';
 import './Admin.css';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const getImageUrl = (image) => {
     if (!image) return '';
     const trimmed = image.trim();
     if (trimmed.startsWith('http') || trimmed.startsWith('data:')) return trimmed;
     if (trimmed.startsWith('www.')) return `https://${trimmed}`;
-    if (trimmed.startsWith('/uploads')) return `http://localhost:5000${trimmed}`;
+    if (trimmed.startsWith('/uploads')) return `${API_URL}${trimmed}`;
     return `/${trimmed}`;
 };
 
@@ -38,7 +40,7 @@ export default function Admin() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/products');
+      const response = await fetch(`${API_URL}/api/products`);
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -90,7 +92,7 @@ export default function Admin() {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
     
     try {
-      await fetch(`http://localhost:5000/api/products/${id}`, {
+      await fetch(`${API_URL}/api/products/${id}`, {
         method: 'DELETE'
       });
       fetchProducts();
@@ -113,7 +115,7 @@ export default function Admin() {
       const uploadData = new FormData();
       uploadData.append('image', imageFile);
       try {
-        const uploadRes = await fetch('http://localhost:5000/api/upload', {
+        const uploadRes = await fetch(`${API_URL}/api/upload`, {
           method: 'POST',
           body: uploadData
         });
@@ -128,8 +130,8 @@ export default function Admin() {
 
     const method = isEditing ? 'PUT' : 'POST';
     const url = isEditing 
-      ? `http://localhost:5000/api/products/${currentProduct.id}` 
-      : 'http://localhost:5000/api/products';
+      ? `${API_URL}/api/products/${currentProduct.id}` 
+      : `${API_URL}/api/products`;
       
     try {
       await fetch(url, {
